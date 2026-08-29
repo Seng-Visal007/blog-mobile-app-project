@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 
 import '../controllers/post_controller.dart';
 import '../../comments/controllers/comment_controller.dart';
+import 'package:share_plus/share_plus.dart';
+import '../../../data/models/post_model.dart';
 
 class PostDetailView extends StatefulWidget {
   const PostDetailView({super.key});
@@ -17,6 +19,7 @@ class _PostDetailViewState extends State<PostDetailView> {
   final TextEditingController _commentController =
     TextEditingController();
 
+  PostModel? currentPost;
   @override
   void initState() {
     super.initState();
@@ -38,8 +41,22 @@ class _PostDetailViewState extends State<PostDetailView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Post Detail'),
-      ),
+      title: const Text('Post Details'),
+      actions: [
+        IconButton(
+          onPressed: () {
+            if (currentPost != null) {
+              SharePlus.instance.share(
+                ShareParams(
+                  text: '${currentPost!.title}\n\nCheck out this post!',
+                ),
+              );
+            }
+          },
+          icon: const Icon(Icons.ios_share),
+        ),
+      ],
+    ),
       body: FutureBuilder(
         future: controller.getPostById(postId),
         builder: (context, snapshot) {
@@ -59,6 +76,7 @@ class _PostDetailViewState extends State<PostDetailView> {
           }
 
           final post = snapshot.data!;
+          currentPost = post;
 
           return SingleChildScrollView(
             child: Column(
