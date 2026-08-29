@@ -1,16 +1,26 @@
-# blog_mobile_app
 
-A new Flutter project.
 
-## Getting Started
+# Blog Mobile App Project
 
-This project is a starting point for a Flutter application.
+## Project Name
+Blog Mobile App
 
-A few resources to get you started if this is your first Flutter project:
+## Student Name
+Seng Visal
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Flutter Version
+Flutter 3.38.4 
+sdk: ^3.10.3
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+API Base URL
+'http://10.0.2.2:8000/api';
+
+Test Account
+Email: visal@gmail.com
+Password: 12345678
+
+## How to Run
+
+1. **Get Dependencies**
+   ```bash
+   flutter pub get
