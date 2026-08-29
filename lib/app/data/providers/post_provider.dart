@@ -34,4 +34,8 @@ class PostProvider {
       data: formData,
     );
   }
+
+  Future<dio.Response> deletePost(int id) async {
+    return await apiService.dio.delete('/posts/$id');
+  }
 }

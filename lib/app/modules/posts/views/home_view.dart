@@ -107,7 +107,7 @@ class HomeView extends GetView<PostController> {
                               ),
                             );
                           },
-                          
+
                           errorBuilder: (
                             context,
                             error,
@@ -157,6 +157,57 @@ class HomeView extends GetView<PostController> {
                                 ),
                               ),
                             ],
+                            const SizedBox(height: 15),
+
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: IconButton(
+                                onPressed: () {
+                                  Get.dialog(
+                                    AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                      title: const Text(
+                                        'Delete Post',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      content: const Text(
+                                        'Are you sure you want to delete this post?',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      actionsPadding: const EdgeInsets.fromLTRB(
+                                        16,
+                                        0,
+                                        16,
+                                        16,
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Get.back();
+                                          },
+                                          child: const Text('Cancel'),
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Get.back();
+                                            controller.deletePost(post.id);
+                                          },
+                                          child: const Text('Delete'),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                                icon: const Icon(Icons.delete),
+                              ),
+                            ),
                           ],
                         ),
                       ),

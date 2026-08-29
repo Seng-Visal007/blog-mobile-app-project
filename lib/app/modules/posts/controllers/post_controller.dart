@@ -133,4 +133,30 @@ class PostController extends GetxController {
       isCreating.value = false;
     }
   }
+
+  Future<void> deletePost(int? id) async {
+    if (id == null) {
+      Get.snackbar(
+        'Error',
+        'Post ID not found.',
+      );
+      return;
+    }
+
+    try {
+      await provider.deletePost(id);
+
+      posts.removeWhere((post) => post.id == id);
+
+      Get.snackbar(
+        'Success',
+        'Post deleted successfully.',
+      );
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Failed to delete post.',
+      );
+    }
+  }
 }
