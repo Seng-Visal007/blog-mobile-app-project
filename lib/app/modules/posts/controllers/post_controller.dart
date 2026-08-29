@@ -1,6 +1,5 @@
 import 'dart:io';
 
-// import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
@@ -50,21 +49,21 @@ class PostController extends GetxController {
   }
 
   Future<PostModel?> getPostById(int id) async {
-  try {
-    final response = await provider.getPostById(id);
+    try {
+      final response = await provider.getPostById(id);
 
-    return PostModel.fromJson(
-      response.data as Map<String, dynamic>,
-    );
-  } catch (e) {
-    Get.snackbar(
-      'Error',
-      'Failed to load post',
-    );
+      return PostModel.fromJson(
+        response.data as Map<String, dynamic>,
+      );
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Failed to load post',
+      );
 
-    return null;
+      return null;
+    }
   }
-}
 
   Future<void> refreshPosts() async {
     await getPosts();
@@ -76,12 +75,7 @@ class PostController extends GetxController {
     );
 
     if (pickedFile != null) {
-      final file = File(pickedFile.path);
-
-      print('Image path: ${file.path}');
-      print('Image exists: ${file.existsSync()}');
-
-      selectedImage.value = file;
+      selectedImage.value = File(pickedFile.path);
     }
   }
 
@@ -124,17 +118,16 @@ class PostController extends GetxController {
       );
 
       selectedImage.value = null;
-
+      Get.back(result: true);
       Get.snackbar(
         'Success',
         'Post created successfully.',
       );
-
-      Get.back(result: true);
     } catch (e) {
       Get.snackbar(
         'Error',
-        'Failed to create post.',
+        e.toString(),
+        duration: const Duration(seconds: 5),
       );
     } finally {
       isCreating.value = false;
